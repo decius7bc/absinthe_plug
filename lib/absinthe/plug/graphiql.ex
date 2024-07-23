@@ -175,7 +175,7 @@ defmodule Absinthe.Plug.GraphiQL do
 
     opts
     |> Absinthe.Plug.init()
-    |> Map.put(:interface, Keyword.get(opts, :interface) || :advanced)
+    |> Map.put(:interface, Keyword.get(opts, :interface) || :simple)
     |> Map.put(:default_headers, Keyword.get(opts, :default_headers))
     |> Map.put(:default_url, Keyword.get(opts, :default_url))
     |> Map.put(:assets, assets)

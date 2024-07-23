@@ -26,13 +26,14 @@ add "&raw" to the end of the URL within a browser.
     }
   </style>
   <link href="<%= assets["graphiql/graphiql.css"] %>" rel="stylesheet" />
+  <link href="<%= assets["@graphiql/plugin-explorer/graphiql-plugin-explorer.css"] %>" rel="stylesheet" />
 </head>
 <body>
   <div id="root"></div>
-  <script src="<%= assets["whatwg-fetch/fetch.js"] %>"></script>
   <script src="<%= assets["react/react.js"] %>"></script>
   <script src="<%= assets["react-dom/react-dom.js"] %>"></script>
   <script src="<%= assets["graphiql/graphiql.js"] %>"></script>
+  <script src="<%= assets["@graphiql/plugin-explorer/graphiql-plugin-explorer.js"] %>"></script>
   <script src="<%= assets["@absinthe/socket-graphiql/socket-graphiql.js"] %>"></script>
   <script>
     // Collect the URL parameters
@@ -71,6 +72,8 @@ add "&raw" to the end of the URL within a browser.
     var subscriptionsClient = new AbsintheSocketGraphiql.SubscriptionsClient(wsUrl, {});
     var fetcher = AbsintheSocketGraphiql.createFetcher(fetchURL, subscriptionsClient, 'Your subscription data will appear here after server publication!');
 
+    var explorerPlugin = GraphiQLPluginExplorer.explorerPlugin();
+
     // When the query and variables string is edited, update the URL bar so
     // that it can be easily shared.
     function onEditQuery(newQuery) {
@@ -85,16 +88,18 @@ add "&raw" to the end of the URL within a browser.
       history.replaceState(null, null, locationQuery(parameters));
     }
     // Render <GraphiQL />
-    ReactDOM.render(
+    ReactDOM.createRoot(
+      document.getElementById("root")
+    ).render(
       React.createElement(GraphiQL, {
         fetcher,
+        plugins: [explorerPlugin],
         onEditQuery: onEditQuery,
         onEditVariables: onEditVariables,
         query: '<%= query_string %>',
         response: '<%= result_string %>',
         variables: '<%= variables_string %>',
       }),
-      document.getElementById("root")
     );
   </script>
 </body>
