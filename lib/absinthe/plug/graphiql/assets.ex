@@ -35,7 +35,7 @@ defmodule Absinthe.Plug.GraphiQL.Assets do
        {"dist/fonts/glyphicons-halflings-regular.svg", "fonts/glyphicons-halflings-regular.svg"},
        {"dist/css/bootstrap.min.css", "css/bootstrap.css"}
      ]},
-    {"graphiql", "3.3.2",
+    {"graphiql", "3.7.1",
      [
        {"graphiql.min.css", "graphiql.css"},
        {"graphiql.min.js", "graphiql.js"}
